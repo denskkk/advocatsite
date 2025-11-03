@@ -97,6 +97,8 @@ document.querySelectorAll('.service-card').forEach(card => {
 });
 
 // Паралакс ефект тільки для великих екранів (не для мобільних)
+// Повністю вимкнено для запобігання накладання елементів
+/*
 if (window.innerWidth > 968) {
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
@@ -106,3 +108,4 @@ if (window.innerWidth > 968) {
         }
     });
 }
+*/

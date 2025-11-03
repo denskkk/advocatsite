@@ -231,6 +231,7 @@ section:nth-child(6) { animation-delay: 0.5s; }
     background: linear-gradient(135deg, #f8fbfd 0%, var(--cream) 50%, #f0f4f8 100%);
     position: relative;
     overflow: hidden;
+    z-index: 2;
 }
 
 .hero::before {
@@ -321,6 +322,8 @@ section:nth-child(6) { animation-delay: 0.5s; }
     gap: 1.2rem;
     flex-wrap: wrap;
     animation: fadeInUp 0.8s ease-out 0.6s backwards;
+    position: relative;
+    z-index: 10;
 }
 
 .btn {
@@ -441,6 +444,7 @@ section:nth-child(6) { animation-delay: 0.5s; }
     color: var(--white);
     position: relative;
     overflow: hidden;
+    z-index: 1;
 }
 
 .quote-section::before {
