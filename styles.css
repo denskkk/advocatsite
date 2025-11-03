@@ -1,0 +1,1439 @@
+/* Загальні стилі */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Спокійні кольори - глибокі та благородні */
+    --primary-blue: #1B3A52;
+    --secondary-blue: #2C5F7C;
+    --light-blue: #E8F1F5;
+    --accent-navy: #0F2537;
+    --accent-teal: #5A9AAA;
+    --dark-gray: #1a2332;
+    --medium-gray: #4A5568;
+    --light-gray: #CBD5E0;
+    --bg-light: #F7FAFC;
+    --white: #FFFFFF;
+    --text-dark: #1A202C;
+    --text-light: #718096;
+    --gold-accent: #C5A572;
+    --cream: #FAF9F6;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: var(--text-dark);
+    line-height: 1.6;
+    background-color: var(--cream);
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Декоративний фоновий патерн */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(27, 58, 82, 0.01) 2px, rgba(27, 58, 82, 0.01) 4px),
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(27, 58, 82, 0.01) 2px, rgba(27, 58, 82, 0.01) 4px);
+    pointer-events: none;
+    z-index: 1;
+}
+
+body > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* Smooth reveal animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Плавна поява для всіх секцій */
+section {
+    opacity: 0;
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+section:nth-child(1) { animation-delay: 0s; }
+section:nth-child(2) { animation-delay: 0.1s; }
+section:nth-child(3) { animation-delay: 0.2s; }
+section:nth-child(4) { animation-delay: 0.3s; }
+section:nth-child(5) { animation-delay: 0.4s; }
+section:nth-child(6) { animation-delay: 0.5s; }
+
+/* Навігація */
+.navbar {
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(27, 58, 82, 0.08);
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.12);
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.logo h2 {
+    color: var(--primary-blue);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    position: relative;
+}
+
+.logo h2::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold-accent), var(--primary-blue));
+    transition: width 0.3s ease;
+}
+
+.logo h2:hover::after {
+    width: 100%;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--gold-accent);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--primary-blue);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background-color: var(--primary-blue);
+    transition: 0.3s;
+}
+
+/* Головна секція */
+.hero {
+    margin-top: 80px;
+    padding: 100px 0 120px;
+    background: linear-gradient(135deg, #f8fbfd 0%, var(--cream) 50%, #f0f4f8 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(27, 58, 82, 0.03) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -5%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(197, 165, 114, 0.04) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 968px) {
+    .hero-content {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+}
+
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    color: var(--primary-blue);
+    margin-bottom: 1.5rem;
+    line-height: 1.15;
+    font-weight: 700;
+    letter-spacing: -1px;
+    animation: fadeInUp 0.8s ease-out;
+    text-shadow: 0 2px 4px rgba(27, 58, 82, 0.05);
+    position: relative;
+}
+
+.hero-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold-accent), transparent);
+    border-radius: 2px;
+}
+
+.hero-subtitle {
+    font-size: 1.6rem;
+    color: var(--secondary-blue);
+    margin-bottom: 2rem;
+    font-weight: 300;
+    letter-spacing: 0.3px;
+    animation: fadeInUp 0.8s ease-out 0.2s backwards;
+}
+
+.hero-description {
+    margin-bottom: 2.5rem;
+    animation: fadeInUp 0.8s ease-out 0.4s backwards;
+}
+
+.hero-description p {
+    color: var(--text-light);
+    margin-bottom: 1.2rem;
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    animation: fadeInUp 0.8s ease-out 0.6s backwards;
+}
+
+.btn {
+    padding: 15px 35px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.btn-primary {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    box-shadow: 0 4px 15px rgba(26, 77, 109, 0.2);
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(26, 77, 109, 0.3);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--primary-blue);
+    border: 2px solid var(--primary-blue);
+    box-shadow: none;
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(26, 77, 109, 0.2);
+}
+
+.hero-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lawyer-photo {
+    width: 420px;
+    height: 420px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 
+        0 20px 60px rgba(27, 58, 82, 0.15),
+        0 0 0 1px rgba(27, 58, 82, 0.05),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    animation: scaleIn 0.8s ease-out 0.3s backwards, float 6s ease-in-out infinite;
+}
+
+.lawyer-photo::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(135deg, var(--gold-accent), var(--primary-blue), var(--gold-accent));
+    border-radius: 12px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.lawyer-photo::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.lawyer-photo:hover::after {
+    left: 100%;
+}
+
+.lawyer-photo:hover::before {
+    opacity: 1;
+}
+
+.lawyer-photo:hover {
+    transform: translateY(-8px) scale(1.02);
+    transition: transform 0.4s ease;
+    box-shadow: 
+        0 30px 80px rgba(27, 58, 82, 0.25),
+        0 0 0 1px rgba(197, 165, 114, 0.3);
+}
+
+.lawyer-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Секція цитати */
+.quote-section {
+    padding: 120px 0;
+    background: linear-gradient(135deg, var(--accent-navy) 0%, var(--primary-blue) 50%, var(--secondary-blue) 100%);
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+}
+
+.quote-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(197, 165, 114, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 50% 20%, rgba(197, 165, 114, 0.06) 0%, transparent 40%);
+    pointer-events: none;
+    animation: float 20s ease-in-out infinite;
+}
+
+.quote-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(197, 165, 114, 0.5), transparent);
+    box-shadow: 0 0 20px rgba(197, 165, 114, 0.5);
+}
+
+.quote {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    padding: 0 20px;
+}
+
+.quote::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 180px;
+    position: absolute;
+    top: -60px;
+    left: -10px;
+    opacity: 0.08;
+    line-height: 1;
+    color: var(--gold-accent);
+}
+
+.quote-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.1rem;
+    font-style: italic;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+    font-weight: 400;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.quote-author {
+    font-size: 1.2rem;
+    opacity: 0.95;
+    font-style: normal;
+    letter-spacing: 1px;
+    color: var(--gold-accent);
+    font-weight: 300;
+}
+
+/* Секція послуг */
+.services {
+    padding: 100px 0 120px;
+    background: var(--cream);
+    position: relative;
+}
+
+.services::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(to bottom, var(--secondary-blue), transparent);
+    opacity: 0.02;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: var(--primary-blue);
+    text-align: center;
+    margin-bottom: 4rem;
+    position: relative;
+    padding-bottom: 25px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold-accent), var(--primary-blue), var(--gold-accent));
+    border-radius: 2px;
+}
+
+.section-title::before {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    background: var(--gold-accent);
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px rgba(197, 165, 114, 0.2);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+@media (max-width: 640px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.service-card {
+    background-color: var(--white);
+    padding: 40px 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(26, 77, 109, 0.12);
+    border: 1px solid var(--light-blue);
+}
+
+.service-icon {
+    font-size: 3rem;
+    margin-bottom: 1.8rem;
+    color: var(--primary-blue);
+    transition: all 0.3s ease;
+}
+
+.service-icon i {
+    display: block;
+    background: linear-gradient(135deg, var(--light-blue), rgba(197, 165, 114, 0.1));
+    width: 85px;
+    height: 85px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin: 0 auto;
+    box-shadow: 
+        0 8px 20px rgba(27, 58, 82, 0.1),
+        inset 0 -2px 10px rgba(27, 58, 82, 0.05);
+    position: relative;
+}
+
+.service-icon i::before {
+    position: relative;
+    z-index: 2;
+}
+
+.service-icon i::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    background: var(--white);
+    border-radius: 50%;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+    transform: scale(1.15) rotate(8deg);
+}
+
+.service-card:hover .service-icon i {
+    background: linear-gradient(135deg, var(--gold-accent), var(--primary-blue));
+    color: var(--white);
+    box-shadow: 
+        0 12px 30px rgba(197, 165, 114, 0.3),
+        0 0 0 4px rgba(197, 165, 114, 0.1);
+}
+
+.service-card h3 {
+    color: var(--primary-blue);
+    margin-bottom: 1.2rem;
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+}
+
+.service-card p {
+    color: var(--text-light);
+    line-height: 1.7;
+    font-size: 0.98rem;
+}
+
+/* Про мене */
+.about {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #f8fbfd 0%, var(--white) 100%);
+}
+
+.about-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.about-text {
+    background: linear-gradient(135deg, rgba(232, 241, 245, 0.7), rgba(255, 255, 255, 0.95));
+    padding: 60px;
+    border-radius: 16px;
+    border-left: 6px solid var(--gold-accent);
+    box-shadow: 
+        0 15px 50px rgba(27, 58, 82, 0.1),
+        0 0 0 1px rgba(27, 58, 82, 0.03),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    position: relative;
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+}
+
+.about-text::before {
+    content: '';
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(197, 165, 114, 0.12) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.about-text::after {
+    content: '';
+    position: absolute;
+    bottom: -50px;
+    left: -50px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(27, 58, 82, 0.05) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.about-highlight {
+    font-size: 1.4rem;
+    color: var(--primary-blue);
+    font-weight: 600;
+    margin-bottom: 2rem;
+    font-family: 'Playfair Display', serif;
+}
+
+.benefits-list {
+    list-style: none;
+}
+
+.benefits-list li {
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    padding-left: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.benefits-list li i {
+    color: var(--gold-accent);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(197, 165, 114, 0.15);
+    border-radius: 50%;
+}
+
+/* Контакти */
+.contact {
+    padding: 120px 0;
+    background: linear-gradient(135deg, var(--cream) 0%, #f8fbfd 50%, var(--cream) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(197, 165, 114, 0.3), transparent);
+}
+
+.contact::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    right: 5%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(27, 58, 82, 0.03) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 15s ease-in-out infinite;
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+@media (max-width: 968px) {
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.contact-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 20px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+    background: rgba(255, 255, 255, 0.5);
+    transform: translateX(10px);
+}
+
+.contact-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    color: var(--white);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(27, 58, 82, 0.2);
+    position: relative;
+}
+
+.contact-icon::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold-accent), var(--primary-blue));
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    animation: float 4s ease-in-out infinite;
+}
+
+.contact-item:hover .contact-icon::before {
+    opacity: 1;
+}
+
+.contact-item:hover .contact-icon {
+    transform: scale(1.1) rotate(10deg);
+    transition: transform 0.3s ease;
+}
+
+.contact-details h3 {
+    color: var(--primary-blue);
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.contact-details p {
+    color: var(--text-dark);
+    font-size: 1.05rem;
+}
+
+.contact-details a {
+    color: var(--secondary-blue);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.contact-details a:hover {
+    color: var(--primary-blue);
+    text-decoration: underline;
+}
+
+.contact-apps {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-top: 0.25rem;
+}
+
+/* Форма контактів */
+.contact-form {
+    background: linear-gradient(135deg, var(--white) 0%, #fafbfc 100%);
+    padding: 60px;
+    border-radius: 16px;
+    box-shadow: 
+        0 15px 50px rgba(27, 58, 82, 0.12),
+        0 0 0 1px rgba(27, 58, 82, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(27, 58, 82, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-form::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(197, 165, 114, 0.05) 0%, transparent 70%);
+    animation: float 20s ease-in-out infinite;
+}
+
+.contact-form h3 {
+    color: var(--primary-blue);
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 16px 20px;
+    border: 2px solid rgba(27, 58, 82, 0.1);
+    border-radius: 8px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: var(--white);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--gold-accent);
+    background-color: var(--white);
+    box-shadow: 
+        0 0 0 4px rgba(197, 165, 114, 0.08),
+        0 4px 12px rgba(27, 58, 82, 0.08);
+    transform: translateY(-2px);
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+/* Футер */
+.footer {
+    background: linear-gradient(135deg, #0f1419 0%, var(--accent-navy) 50%, var(--primary-blue) 100%);
+    color: var(--white);
+    padding: 50px 0;
+    text-align: center;
+    border-top: 3px solid var(--gold-accent);
+    position: relative;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 30% 50%, rgba(197, 165, 114, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 70% 50%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.footer-content {
+    position: relative;
+    z-index: 1;
+}
+
+.footer-content p {
+    margin-bottom: 0.7rem;
+    font-size: 0.98rem;
+    letter-spacing: 0.3px;
+}
+
+.footer-note {
+    opacity: 0.85;
+    font-size: 0.92rem;
+    color: var(--gold-accent);
+    font-weight: 300;
+}
+
+/* Адаптивність */
+
+/* Планшети та невеликі ноутбуки */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 960px;
+    }
+    
+    .hero-title {
+        font-size: 3rem;
+    }
+    
+    .section-title {
+        font-size: 2.5rem;
+    }
+    
+    .lawyer-photo {
+        width: 380px;
+        height: 380px;
+    }
+}
+
+@media (max-width: 968px) {
+    .hero-content,
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+    
+    .hero {
+        padding: 60px 0 80px;
+    }
+    
+    .hero-image {
+        order: -1;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .lawyer-photo {
+        width: 320px;
+        height: 320px;
+    }
+    
+    .nav-links {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background-color: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        width: 100%;
+        text-align: center;
+        transition: left 0.3s ease;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        padding: 30px 0;
+        gap: 0;
+        z-index: 999;
+    }
+    
+    .nav-links.active {
+        left: 0;
+    }
+    
+    .nav-links li {
+        margin: 15px 0;
+    }
+    
+    .menu-toggle {
+        display: flex;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+        text-align: center;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.3rem;
+        text-align: center;
+    }
+    
+    .hero-description {
+        text-align: center;
+    }
+    
+    .hero-buttons {
+        justify-content: center;
+    }
+    
+    .quote-text {
+        font-size: 1.6rem;
+    }
+    
+    .section-title {
+        font-size: 2.2rem;
+    }
+    
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+    
+    .contact-form,
+    .about-text {
+        padding: 40px;
+    }
+}
+
+/* Мобільні телефони (ландшафт) */
+@media (max-width: 768px) {
+    .hero {
+        padding: 40px 0 60px;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.15rem;
+    }
+    
+    .hero-description p {
+        font-size: 1rem;
+    }
+    
+    .services,
+    .about,
+    .contact {
+        padding: 60px 0;
+    }
+    
+    .quote-section {
+        padding: 60px 0;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 2.5rem;
+    }
+    
+    .service-card {
+        padding: 35px 25px;
+    }
+    
+    .service-icon i {
+        width: 70px;
+        height: 70px;
+        font-size: 2.5rem;
+    }
+    
+    .contact-form,
+    .about-text {
+        padding: 35px 25px;
+    }
+}
+
+/* Мобільні телефони (портрет) */
+@media (max-width: 640px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .hero {
+        margin-top: 70px;
+        padding: 30px 0 40px;
+    }
+    
+    .hero-title {
+        font-size: 1.75rem;
+        letter-spacing: -0.5px;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-title::after {
+        width: 60px;
+        height: 3px;
+        bottom: -8px;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.05rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .hero-description p {
+        font-size: 0.95rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .btn {
+        width: 100%;
+        text-align: center;
+        padding: 14px 30px;
+        font-size: 0.85rem;
+    }
+    
+    .lawyer-photo {
+        width: 280px;
+        height: 280px;
+        border-radius: 10px;
+    }
+    
+    .section-title {
+        font-size: 1.75rem;
+        margin-bottom: 2rem;
+        padding-bottom: 15px;
+    }
+    
+    .section-title::after {
+        width: 60px;
+        height: 3px;
+    }
+    
+    .section-title::before {
+        width: 6px;
+        height: 6px;
+        bottom: -6px;
+    }
+    
+    .services,
+    .about,
+    .contact {
+        padding: 50px 0;
+    }
+    
+    .quote-section {
+        padding: 50px 0;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .service-card {
+        padding: 30px 20px;
+    }
+    
+    .service-card h3 {
+        font-size: 1.2rem;
+    }
+    
+    .service-card p {
+        font-size: 0.92rem;
+    }
+    
+    .service-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1.2rem;
+    }
+    
+    .service-icon i {
+        width: 65px;
+        height: 65px;
+        font-size: 2rem;
+    }
+    
+    .quote {
+        padding: 0 15px;
+    }
+    
+    .quote::before {
+        font-size: 100px;
+        top: -30px;
+        left: 0;
+    }
+    
+    .quote-text {
+        font-size: 1.3rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+    
+    .quote-author {
+        font-size: 1rem;
+    }
+    
+    .about-text {
+        padding: 30px 20px;
+        border-radius: 10px;
+    }
+    
+    .about-text::before,
+    .about-text::after {
+        display: none;
+    }
+    
+    .about-highlight {
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .benefits-list li {
+        font-size: 1rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .benefits-list li i {
+        width: 20px;
+        height: 20px;
+        font-size: 0.9rem;
+    }
+    
+    .contact-content {
+        gap: 40px;
+    }
+    
+    .contact-info {
+        gap: 25px;
+    }
+    
+    .contact-item {
+        padding: 15px;
+    }
+    
+    .contact-item:hover {
+        transform: translateX(5px);
+    }
+    
+    .contact-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+    }
+    
+    .contact-details h3 {
+        font-size: 1.1rem;
+    }
+    
+    .contact-details p {
+        font-size: 0.95rem;
+    }
+    
+    .contact-form {
+        padding: 30px 20px;
+        border-radius: 10px;
+    }
+    
+    .contact-form::before {
+        display: none;
+    }
+    
+    .contact-form h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-group {
+        margin-bottom: 1.2rem;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        padding: 12px 16px;
+        font-size: 0.95rem;
+        border-radius: 6px;
+    }
+    
+    .footer {
+        padding: 35px 0;
+    }
+    
+    .footer-content p {
+        font-size: 0.9rem;
+    }
+    
+    .footer-note {
+        font-size: 0.85rem;
+    }
+}
+
+/* Дуже маленькі телефони */
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 1.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.95rem;
+    }
+    
+    .lawyer-photo {
+        width: 240px;
+        height: 240px;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .quote-text {
+        font-size: 1.1rem;
+    }
+    
+    .service-card {
+        padding: 25px 18px;
+    }
+    
+    .service-icon i {
+        width: 60px;
+        height: 60px;
+        font-size: 1.8rem;
+    }
+    
+    .about-text,
+    .contact-form {
+        padding: 25px 18px;
+    }
+    
+    .contact-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+}
+
+/* Landscape mode для телефонів */
+@media (max-width: 968px) and (orientation: landscape) {
+    .hero {
+        padding: 40px 0;
+    }
+    
+    .lawyer-photo {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .services,
+    .about,
+    .contact {
+        padding: 50px 0;
+    }
+    
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Дуже великі екрани */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+    
+    .hero-title {
+        font-size: 4rem;
+    }
+    
+    .section-title {
+        font-size: 3.2rem;
+    }
+    
+    .lawyer-photo {
+        width: 480px;
+        height: 480px;
+    }
+}
