@@ -96,11 +96,13 @@ document.querySelectorAll('.service-card').forEach(card => {
     observer.observe(card);
 });
 
-// Паралакс ефект для hero секції
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero');
-    if (hero) {
-        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-    }
-});
+// Паралакс ефект тільки для великих екранів (не для мобільних)
+if (window.innerWidth > 968) {
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const hero = document.querySelector('.hero');
+        if (hero && scrolled < 500) {
+            hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+        }
+    });
+}
