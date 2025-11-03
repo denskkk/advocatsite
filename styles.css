@@ -936,6 +936,63 @@ section:nth-child(6) { animation-delay: 0.5s; }
     resize: vertical;
 }
 
+/* Плавающая кнопка звонка */
+.floating-call-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--gold-color), #d4af37);
+    color: white;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(197, 165, 114, 0.4), 
+                0 8px 40px rgba(197, 165, 114, 0.3);
+    z-index: 9999;
+    transition: all 0.3s ease;
+    animation: pulse 2s infinite;
+}
+
+.floating-call-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 30px rgba(197, 165, 114, 0.6), 
+                0 12px 50px rgba(197, 165, 114, 0.4);
+}
+
+.floating-call-btn i {
+    animation: shake 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 4px 20px rgba(197, 165, 114, 0.4), 
+                    0 8px 40px rgba(197, 165, 114, 0.3);
+    }
+    50% {
+        box-shadow: 0 4px 20px rgba(197, 165, 114, 0.6), 
+                    0 8px 40px rgba(197, 165, 114, 0.5),
+                    0 0 0 15px rgba(197, 165, 114, 0.1);
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: rotate(0deg); }
+    10%, 30%, 50%, 70%, 90% { transform: rotate(-10deg); }
+    20%, 40%, 60%, 80% { transform: rotate(10deg); }
+}
+
+/* Показывать кнопку только на мобильных */
+@media (max-width: 968px) {
+    .floating-call-btn {
+        display: flex;
+    }
+}
+
 /* Футер */
 .footer {
     background: linear-gradient(135deg, #0f1419 0%, var(--accent-navy) 50%, var(--primary-blue) 100%);
