@@ -489,27 +489,6 @@ body > * {
     border: 2px solid rgba(197, 164, 109, 0.25);
 }
 
-.hero-quote-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.15rem;
-    font-style: italic;
-    color: rgba(255, 255, 255, 0.95);
-    line-height: 1.6;
-    margin-bottom: 12px;
-    font-weight: 500;
-}
-
-.hero-quote-author {
-    font-size: 0.95rem;
-    background: linear-gradient(135deg, var(--gold-warm) 0%, var(--gold-light) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-style: normal;
-    font-weight: 600;
-    letter-spacing: 0.8px;
-}
-
 /* Цитата под фото в Hero */
 .hero-quote {
     margin-top: 30px;
@@ -523,7 +502,7 @@ body > * {
 
 .hero-quote-text {
     font-family: 'Playfair Display', serif;
-    font-size: 1.15rem;
+    font-size: 1.4rem;
     font-style: italic;
     color: rgba(255, 255, 255, 0.95);
     line-height: 1.6;
@@ -532,7 +511,7 @@ body > * {
 }
 
 .hero-quote-author {
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     background: linear-gradient(135deg, var(--gold-warm) 0%, var(--gold-light) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -1231,11 +1210,11 @@ body > * {
     }
 
     .hero-quote-text {
-        font-size: 1rem;
+        font-size: 1.15rem;
     }
 
     .hero-quote-author {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
     }
 
     .quote-text {
